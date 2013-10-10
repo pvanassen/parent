@@ -10,7 +10,7 @@
 
 	<groupId>nl.pvanassen</groupId>
 	<artifactId>parent</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>pom</packaging>
 	<name>Parent pom</name>
 	<description>Parent pom for projects by Paul van Assen</description>
@@ -36,7 +36,8 @@
 		<connection>scm:git:git@github.com:pvanassen/parent.git</connection>
 		<developerConnection>scm:git:git@github.com:pvanassen/parent.git</developerConnection>
 		<url>https://github.com/pvanassen/parent</url>
-	</scm>
+	  <tag>parent-0.1</tag>
+  </scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -166,7 +167,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
