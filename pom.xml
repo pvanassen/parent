@@ -239,6 +239,10 @@
 					<datafile>${project.build.directory}/jacoco.exec</datafile>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 </project>
