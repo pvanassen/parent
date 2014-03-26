@@ -11,7 +11,7 @@
 
 	<groupId>nl.pvanassen</groupId>
 	<artifactId>parent</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Parent pom</name>
 	<description>Parent pom for projects by Paul van Assen</description>
