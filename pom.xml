@@ -237,7 +237,7 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>test</id>
+			<id>groovy</id>
 			<activation>
 				<file>
 					<exists>${basedir}/src/main/groovy</exists>
