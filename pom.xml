@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -152,7 +153,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+                                        <ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -226,7 +227,7 @@
 								<reactorModuleConvergence>
 									<message>The reactor is not valid</message>
 								</reactorModuleConvergence>
-								<enforceImportRelease implementation="com.synedge.enforcer.EnforceImportRelease"></enforceImportRelease>
+                                <enforceImportRelease implementation="com.synedge.enforcer.EnforceImportRelease"/>
 							</rules>
 							<fail>true</fail>
 						</configuration>
@@ -250,18 +251,6 @@
 						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -326,8 +315,32 @@
 		</plugins>
 	</build>
 	<profiles>
+        <profile>
+            <id>java</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src/main/java</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 		<profile>
-			<id>test</id>
+            <id>groovy</id>
 			<activation>
 				<file>
 					<exists>${basedir}/src/main/groovy</exists>
