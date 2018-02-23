@@ -1,9 +1,15 @@
 node {
-    stage('Build') {
-        echo 'Building....'
+    stage('Clean') {
+        mvn clean
+    }
+    stage('Compile') {
+        mvn test
     }
     stage('Test') {
-        echo 'Building....'
+        mvn test
+    }
+    stage('Install') {
+        mvn install
     }
     stage('Deploy') {
         echo 'Deploying....'
