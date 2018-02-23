@@ -1,17 +1,18 @@
+def buildJdk = 'jdk8'
+def buildMvn = 'maven'
+
 node {
     stage('Clean') {
-        mvn clean
-    }
-    stage('Compile') {
-        mvn test
-    }
-    stage('Test') {
-        mvn test
-    }
-    stage('Install') {
-        mvn install
-    }
-    stage('Deploy') {
-        echo 'Deploying....'
+        withMaven(jdk: jdkName, maven: mvnName, mavenLocalRepo:"${WORK_DIR}/.repository", options:[
+            artifactsPublisher(disabled: false),
+            junitPublisher(ignoreAttachments: false),
+            findbugsPublisher(disabled: false),
+            openTasksPublisher(disabled: false),
+            dependenciesFingerprintPublisher(),
+            invokerPublisher(),
+            pipelineGraphPublisher()
+        ]) {
+            sh "mvn clean verify -B -U -e -fae -V -Dmaven.test.failure.ignore=true"
+        }
     }
 }
