@@ -3,7 +3,7 @@ def buildMvn = 'maven'
 
 node {
     stage('Clean') {
-        withMaven(jdk: buildJdk, maven: buildMvn, mavenLocalRepo:"${WORK_DIR}/.repository", options:[
+        withMaven(jdk: buildJdk, maven: buildMvn, mavenLocalRepo:".repository", options:[
             artifactsPublisher(disabled: false),
             junitPublisher(ignoreAttachments: false),
             findbugsPublisher(disabled: false),
