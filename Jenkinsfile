@@ -4,7 +4,6 @@ def buildMvn = 'maven'
 node {
     stage('Clean') {
         withMaven(jdk: buildJdk, maven: buildMvn, mavenLocalRepo:".repository", options:[
-            artifactsPublisher(disabled: false),
             junitPublisher(ignoreAttachments: false),
             findbugsPublisher(disabled: false),
             openTasksPublisher(disabled: false),
