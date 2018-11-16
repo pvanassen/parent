@@ -7,6 +7,7 @@ pipeline {
     triggers {
         pollSCM('0 0 * * 0')
     }
+
     stages {
         stage('Checkout code') {
             steps {
@@ -19,10 +20,25 @@ pipeline {
             }
         }
 
-        stage ('Deploy') {
+        stage ('Deploy snapshot') {
+            when {
+                not {
+                    branch 'master'
+                }
+            }
             steps {
                 sh 'mvn deploy'
             }
         }
+
+        stage ('Deploy master') {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh 'mvn deploy -Psonatype-oss-release'
+            }
+        }
+
     }
 }
