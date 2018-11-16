@@ -29,7 +29,7 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'mvn deploy'
+                        sh 'mvn deploy -DaltDeploymentRepository=snapshots-paul::maven2::http://nexus3.int.paules.nl/repository/snapshots/'
                     }
                 }
 
