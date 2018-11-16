@@ -324,7 +324,13 @@
 						<goals>
 							<goal>sign</goal>
 						</goals>
-					</execution>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -677,7 +683,13 @@
 								<goals>
 									<goal>sign</goal>
 								</goals>
-							</execution>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
 						</executions>
 					</plugin>
 				</plugins>
