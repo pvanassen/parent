@@ -1,17 +1,19 @@
-def buildJdk = 'jdk8'
-def buildMvn = 'maven'
-
-node {
-    stage('Clean') {
-        withMaven(jdk: buildJdk, maven: buildMvn, mavenLocalRepo:".repository", options:[
-            junitPublisher(ignoreAttachments: false),
-            findbugsPublisher(disabled: false),
-            openTasksPublisher(disabled: false),
-            dependenciesFingerprintPublisher(),
-            invokerPublisher(),
-            pipelineGraphPublisher()
-        ]) {
-            sh "mvn clean verify -B -U -e -fae -V -Dmaven.test.failure.ignore=true"
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+    stages {
+        stage ('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
         }
     }
 }
