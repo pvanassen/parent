@@ -4,6 +4,9 @@ pipeline {
         maven 'maven'
         jdk 'jdk8'
     }
+    triggers {
+        pollSCM('0 0 * * 0')
+    }
     stages {
         stage('Checkout code') {
             steps {
@@ -15,6 +18,7 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true install'
             }
         }
+
         stage ('Deploy') {
             steps {
                 sh 'mvn deploy'
