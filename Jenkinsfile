@@ -20,25 +20,28 @@ pipeline {
             }
         }
 
-        stage ('Deploy snapshot') {
-            when {
-                not {
-                    branch 'master'
+        stage ('Deploy') {
+            parallel {
+                stage ('Deploy snapshot') {
+                    when {
+                        not {
+                            branch 'master'
+                        }
+                    }
+                    steps {
+                        sh 'mvn deploy'
+                    }
+                }
+
+                stage ('Deploy master') {
+                    when {
+                        branch 'master'
+                    }
+                    steps {
+                        sh 'mvn deploy -Psonatype-oss-release'
+                    }
                 }
             }
-            steps {
-                sh 'mvn deploy'
-            }
         }
-
-        stage ('Deploy master') {
-            when {
-                branch 'master'
-            }
-            steps {
-                sh 'mvn deploy -Psonatype-oss-release'
-            }
-        }
-
     }
 }
