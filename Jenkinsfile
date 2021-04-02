@@ -14,9 +14,10 @@ pipeline {
                 checkout scm
             }
         }
+
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn install'
             }
         }
 
@@ -29,7 +30,7 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'mvn deploy'
+                        sh 'mvn deploy -DaltDeploymentRepository=snapshots-paul::http://nexus3.int.paules.nl/repository/snapshots/'
                     }
                 }
 
